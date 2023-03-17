@@ -1,0 +1,9 @@
+.input_group {
+    @apply border rounded-xl min-w-[300px] max-w-[300px];
+    position: relative;
+}
+
+.input_text {
+    @apply w-full py-4 px-6 border rounded-xl bg-slate-50;
+    @apply focus:outline-none border-none;
+}
