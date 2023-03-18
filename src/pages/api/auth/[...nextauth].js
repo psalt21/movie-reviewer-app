@@ -43,7 +43,8 @@ export const authOptions = {
                 throw new Error('Missing credentials');
             }
         })
-    ]
+    ],
+    secret: process.env.NEXTAUTH_SECRET
 }
 
 export default NextAuth(authOptions);
