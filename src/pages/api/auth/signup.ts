@@ -1,8 +1,9 @@
 import connectMongo from "@/database/conn";
-import Users from "@/model/schema";
+import Users from "@/model/Schema";
 import { hash } from 'bcryptjs';
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     connectMongo().catch(error => res.json({error: 'Connection Failed...!'}));
 
     if(req.method === 'POST') {

@@ -6,7 +6,7 @@ import connectMongo from '@/database/conn';
 import Users from '@/model/Schema';
 import { compare } from 'bcryptjs';
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
     // https://next-auth.js.org/configuration/providers/oauth
     providers: [
         GoogleProvider({

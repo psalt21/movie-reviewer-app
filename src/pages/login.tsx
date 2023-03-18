@@ -32,7 +32,7 @@ export default function Login() {
             callbackUrl: '/'
         });
 
-        if(status?.ok) {
+        if(status && status.ok && status.url) {
             router.push(status.url);
         }
     }
@@ -118,7 +118,7 @@ export default function Login() {
                 </form>
 
                 <p className='text-center text-gray-400'>
-                    Don't have an account yet? <Link href={'/register'}>Sign Up</Link>
+                    Don&apos;t have an account yet? <Link href={'/register'}>Sign Up</Link>
                 </p>
             </section>
         </Layout>
