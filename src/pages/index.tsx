@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { getSession, useSession, signOut } from 'next-auth/react';
+import { NextApiRequest } from 'next';
 
 export default function Home() {
   const { data: session } = useSession();
@@ -33,7 +34,7 @@ function Guest() {
 }
 
 // Authorized User
-function User({ session, handleSignOut }) {
+function User({ session, handleSignOut }: any) {
   return (
     <main className='container mx-auto text-center py-20'>
       <h3 className='text-4xl font-bold'>Authorized User Homepage</h3>
@@ -61,7 +62,7 @@ function User({ session, handleSignOut }) {
 }
 
 
-export async function getServerSideProps ({ req }) {
+export async function getServerSideProps ({ req }: any) {
   const session = await getSession({ req });
 
   if (!session) {
