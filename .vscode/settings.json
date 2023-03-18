@@ -3,6 +3,7 @@
         "cpassword",
         "formik",
         "signin",
-        "Signup"
+        "Signup",
+        "tailwindcss"
     ]
 }

@@ -5,8 +5,15 @@ import styles from '@/styles/Form.module.css';
 import { signIn } from 'next-auth/react';
 import { useFormik } from 'formik';
 import { validateLogin } from '@/lib/validate';
+import { useRouter } from 'next/router';
+
+interface FormValues {
+    email?: string;
+    password?: string;
+}
 
 export default function Login() {
+    const router = useRouter();
     // Formik hook
     const formik = useFormik({
         initialValues: {
@@ -17,15 +24,21 @@ export default function Login() {
         onSubmit
     });
 
-    console.log(formik.errors);
+    async function onSubmit(values: FormValues) {
+        const status = await signIn('credentials', {
+            redirect: false,
+            email: values.email,
+            password: values.password,
+            callbackUrl: '/'
+        });
 
-    async function onSubmit(values) {
-        console.log('onSubmit values are:', values);
+        if(status?.ok) {
+            router.push(status.url);
+        }
     }
 
     // Google Login
     async function handleGoogleSignin(){
-        console.log('You are inside the goddamn google signin function!');
         signIn('google', { callbackUrl: 'http://localhost:3000'});
     }
     
