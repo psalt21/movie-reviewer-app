@@ -1,13 +1,16 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '@/components/Layout';
+import AuthLayout from '@/components/AuthLayout';
 import styles from '@/styles/Form.module.css';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { validateSignup } from '@/lib/validate';
+import FormValues from '@/shared/interfaces/form.interface';
+import { useRouter } from 'next/router';
 
 export default function Register() {
     const [ show, setShow ] = useState({ password: false, cpassword: false });
+    const router = useRouter();
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -19,12 +22,22 @@ export default function Register() {
         onSubmit
     });
 
-    async function onSubmit(values: {}) {
-        console.log(values);
+    async function onSubmit(values: FormValues) {
+        const options = {
+            method:'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(values)
+        }
+
+        await fetch('api/auth/signup', options)
+            .then(res => res.json())
+            .then(data => {
+                if(data) router.push('/')
+            });
     }
 
     return (
-        <Layout>
+        <AuthLayout>
             <Head>
                 <title>Register</title>
             </Head>
@@ -112,16 +125,16 @@ export default function Register() {
 
                     {/* login buttons */}
                     <div className='input-button'>
-                        <button type='submit'>
+                        <button type='submit' className='form-button'>
                             Sign Me Up!
                         </button>
                     </div>
                 </form>
 
                 <p className='text-center text-gray-400'>
-                    Already have an account? <Link href={'/login'}>Login</Link>
+                    Already have an account? <Link href={'/login'} className='text-link'>Login</Link>
                 </p>
             </section>
-        </Layout>
+        </AuthLayout>
     );
 }

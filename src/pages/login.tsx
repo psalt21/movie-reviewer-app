@@ -1,16 +1,14 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '@/components/Layout';
+import AuthLayout from '@/components/AuthLayout';
 import styles from '@/styles/Form.module.css';
 import { signIn } from 'next-auth/react';
 import { useFormik } from 'formik';
 import { validateLogin } from '@/lib/validate';
 import { useRouter } from 'next/router';
-
-interface FormValues {
-    email?: string;
-    password?: string;
-}
+import FormValues from '@/shared/interfaces/form.interface';
+import { BsGoogle, BsGithub } from 'react-icons/bs';
+import Image from 'next/image';
 
 export default function Login() {
     const router = useRouter();
@@ -39,16 +37,16 @@ export default function Login() {
 
     // Google Login
     async function handleGoogleSignin(){
-        signIn('google', { callbackUrl: 'http://localhost:3000'});
+        signIn('google', { callbackUrl: '/'});
     }
     
     // Github Login
     async function handleGithubSignin(){
-        signIn('github', { callbackUrl: 'http://localhost:3000'});
+        signIn('github', { callbackUrl: '/'});
     }
 
     return (
-        <Layout>
+        <AuthLayout>
             <Head>
                 <title>Login</title>
             </Head>
@@ -101,26 +99,30 @@ export default function Login() {
 
                     {/* login buttons */}
                     <div className='input-button'>
-                        <button type='submit'>
+                        <button type='submit' className='form-button'>
                             Login
                         </button>
                     </div>
-                    <div className="input-button">
-                        <button type='button' onClick={handleGoogleSignin}>
-                            Sign In with Google
-                        </button>
-                    </div>
-                    <div className="input-button">
-                        <button type='button' onClick={handleGithubSignin}>
-                            Sign In with GitHub
-                        </button>
-                    </div>
+                    <section>
+                        <div className="input-button text-link oauth-link flex gap-1.5">
+                            <button type='button' onClick={handleGoogleSignin}>
+                                Sign In with Google 
+                            </button>
+                            <BsGoogle className='mt-1 fill-[#4C8BF5]'/>
+                        </div>
+                        <div className="input-button text-link oauth-link flex gap-1.5">
+                            <button type='button' onClick={handleGithubSignin}>
+                                Sign In with GitHub
+                            </button>
+                            <BsGithub className='mt-1 fill-[#bd2c00]' />
+                        </div>
+                    </section>
                 </form>
 
                 <p className='text-center text-gray-400'>
-                    Don&apos;t have an account yet? <Link href={'/register'}>Sign Up</Link>
+                    Don&apos;t have an account yet? <Link href={'/register'} className='text-link'>Sign Up</Link>
                 </p>
             </section>
-        </Layout>
+        </AuthLayout>
     );
 }

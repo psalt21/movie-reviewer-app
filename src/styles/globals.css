@@ -16,7 +16,7 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: gray;
   background: linear-gradient(
       to bottom,
       transparent,
@@ -34,4 +34,45 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.form-button {
+  background-color: #2D9CDB;
+  color: white;
+  padding: 4px 16px;
+  border-radius: 3px;
+}
+
+.form-button:hover {
+  background-color: #54acdf;
+}
+
+.form-button:active {
+  background-color: #0d7ab9;
+}
+
+.text-link:hover {
+  color: rgb(184, 184, 184);
+}
+
+.text-link:active {
+  color: rgb(124, 123, 123);
+}
+
+.oauth-link {
+  border: 1px solid rgb(156 163 175);
+  padding: 3px 6px;
+  margin-bottom: 10px;
+}
+
+.oauth-link:hover {
+  border-color: rgb(88, 88, 88);
+  background-color: rgb(252, 252, 252);
+  color: rgb(88, 88, 88);
+}
+
+.oauth-link:active {
+  border-color: rgb(80, 80, 80);
+  background-color: rgb(110, 110, 110);
+  color: white;
 }
