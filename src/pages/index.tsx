@@ -1,21 +1,17 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { getSession, useSession, signOut } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import AppLayout from '@/components/AppLayout';
 
 export default function Home() {
   const { data: session } = useSession();
-
-  function handleSignOut() {
-    signOut();
-  }
   
   return (
     <>
       <Head>
         <title>Movie Reviewer - Home</title>
       </Head>
-      {session ? User({ session, handleSignOut }) : Guest()}
+      {session ? User({ session }) : Guest()}
     </>
   )
 }
@@ -23,18 +19,20 @@ export default function Home() {
 // Guest
 function Guest() {
   return (
-    <main className='container mx-auto text-center py-20'>
-      <h3 className='text-4xl font-bold'>Guest Homepage</h3>
+    <AppLayout>
+      <main className='container mx-auto text-center py-20'>
+        <h3 className='text-4xl font-bold'>Guest Homepage</h3>
 
-      <div className='flex justify-center'>
-        <Link href={'/login'} className='mt-5 px-10 py-1 rounded-sm text-link'>Sign In</Link>
-      </div>
-    </main>
+        <div className='flex justify-center'>
+          <Link href={'/login'} className='mt-5 px-10 py-1 rounded-sm text-link'>Sign In</Link>
+        </div>
+      </main>
+    </AppLayout>
   )
 }
 
 // Authorized User
-function User({ session, handleSignOut }: any) {
+function User({ session }: any) {
   return (
     <AppLayout>
       <main className='container mx-auto text-center py-20'>
@@ -43,16 +41,6 @@ function User({ session, handleSignOut }: any) {
         <div className='details'>
           <h5>{session.user.name}</h5>
           <h5>{session.user.email}</h5>
-        </div>
-
-        <div className='flex justify-center'>
-          <button
-            type='button'
-            className='mt-5 px-10 py-1 form-button'
-            onClick={handleSignOut}
-            >
-              Sign Out
-            </button>
         </div>
 
         <div className='flex justify-center'>

@@ -1,15 +1,12 @@
 import AppLayout from "@/components/AppLayout";
 import { getSession } from "next-auth/react";
-import Link from "next/link";
 
 export default function Profile() {
     return (
         <AppLayout>
-            <section className='container mx-auto text-center'>
+            <main className='container mx-auto text-center py-20'>
                 <h3 className='text-4xl font-bold'>Profile Page</h3>
-
-                <Link href={'/'} className='text-link'>Home Page</Link>
-            </section>
+            </main>
         </AppLayout>
     )
 }
