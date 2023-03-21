@@ -8,9 +8,11 @@ import { validateLogin } from '@/lib/validate';
 import { useRouter } from 'next/router';
 import FormValues from '@/shared/interfaces/form.interface';
 import { BsGoogle, BsGithub } from 'react-icons/bs';
-import Image from 'next/image';
+import { useState } from 'react';
 
 export default function Login() {
+    const [error, setError] = useState('');
+
     const router = useRouter();
     // Formik hook
     const formik = useFormik({
@@ -32,6 +34,10 @@ export default function Login() {
 
         if(status && status.ok && status.url) {
             router.push(status.url);
+        }
+
+        if (status && status.error) {
+            setError(status.error);
         }
     }
 
@@ -97,6 +103,10 @@ export default function Login() {
                             <></>}
                     </section>
 
+                    <section>
+                        {error && <p className='text-rose-400 pl-2'>{error}</p>}
+                    </section>
+
                     {/* login buttons */}
                     <div className='input-button'>
                         <button type='submit' className='form-button'>
@@ -120,7 +130,7 @@ export default function Login() {
                 </form>
 
                 <p className='text-center text-gray-400'>
-                    Don&apos;t have an account yet? <Link href={'/register'} className='text-link'>Sign Up</Link>
+                    Don&apos;t have an account yet? <Link href={'/register'} className='text-link text-[#4C8BF5]'>Sign Up</Link>
                 </p>
             </section>
         </AuthLayout>
