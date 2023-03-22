@@ -132,7 +132,7 @@ export default function Register() {
                 </form>
 
                 <p className='text-center text-gray-400'>
-                    Already have an account? <Link href={'/login'} className='text-link'>Login</Link>
+                    Already have an account? <Link href={'/login'} className='text-link text-[#2D9CDB]'>Login</Link>
                 </p>
             </section>
         </AuthLayout>

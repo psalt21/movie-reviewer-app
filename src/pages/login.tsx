@@ -130,7 +130,7 @@ export default function Login() {
                 </form>
 
                 <p className='text-center text-gray-400'>
-                    Don&apos;t have an account yet? <Link href={'/register'} className='text-link text-[#4C8BF5]'>Sign Up</Link>
+                    Don&apos;t have an account yet? <Link href={'/register'} className='text-link text-[#2D9CDB]'>Sign Up</Link>
                 </p>
             </section>
         </AuthLayout>

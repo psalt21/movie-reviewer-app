@@ -2,10 +2,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { getSession, useSession } from 'next-auth/react';
 import AppLayout from '@/components/AppLayout';
+import MovieSearch from '@/components/MovieSearch';
 
 export default function Home() {
   const { data: session } = useSession();
-  
+
   return (
     <>
       <Head>
@@ -46,6 +47,7 @@ function User({ session }: any) {
         <div className='flex justify-center'>
           <Link href={'/profile'} className='mt-5 px-10 py-1 form-button'>Profile Page</Link>
         </div>
+        <MovieSearch />
       </main>
     </AppLayout>
   )
