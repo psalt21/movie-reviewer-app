@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const titleTypeValue = query?.title_type ?? 'movie';
             const yearValue = query?.year ?? null;
 
-            endpoint =  `https://moviesdatabase.p.rapidapi.com/titles/search/title/${query.title}?exact=${exactValue}&titleType=${titleTypeValue}`;
+            endpoint =  `https://moviesdatabase.p.rapidapi.com/titles/search/title/${query.title}?exact=${exactValue}&titleType=${titleTypeValue}&info=base_info`;
 
             if (yearValue) endpoint += `&year=${yearValue}`;
 
@@ -44,6 +44,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         }
     );
-    const data = await response.json();
+    let data = await response.json();
+
+    // modify data to remove any movie results without images
+    data.results = data.results.filter((item: any) => item.primaryImage !== null);
+
     return res.status(200).json(data);
 }
